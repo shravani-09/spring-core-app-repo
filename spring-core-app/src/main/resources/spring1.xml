@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+ http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations"
+			value="classpath:messages.properties" />
+	</bean>
+	
+	<bean id="houseAddressBean" 
+				class="com.cg.training.bean.Address">
+		<constructor-arg name="plotNumber" value="${PLOT-NUMBER}" />
+		<constructor-arg name="streetName" value="${STREET-NAME}" />
+		<constructor-arg name="city" value="${CITY}" />
+		<constructor-arg name="state" value="${STATE}" />
+		<constructor-arg name="pinCode" value="${PIN}" />
+	</bean>
+
+	<bean id="officeAddressBean"
+			 class="com.cg.training.bean.Address"
+			 autowire-candidate="false" >
+		<constructor-arg name="plotNumber" value="501" />
+		<constructor-arg name="streetName"
+			value="Queen Street" />
+		<constructor-arg name="city" value="Hyderabad" />
+		<constructor-arg name="state" value="Telangana" />
+		<constructor-arg name="pinCode" value="500001" />
+	</bean>
+
+	<bean id="birthdateBean" class="java.util.Date">
+
+	</bean>
+
+	<bean id="personBean" class="com.cg.training.bean.Person"
+		scope="singleton" autowire="byType">
+		<property name="adharCard" value="987978671398" />
+		<property name="name" value="Smith" />
+		<property name="birthdate" ref="birthdateBean" />
+		<property name="mobile" value="9876574350" />
+		<!-- <property name="houseAddress" ref="houseAddressBean"/> -->
+	</bean>
+
+</beans>
